@@ -1,0 +1,27 @@
+.card-balance{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px ;
+    background-color: #9B9B9B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 2em;
+    row-gap: 1em;
+}
+.balanceHeader{
+    font-weight: 400;
+    font-size: 30px;
+    color: var(--color-white);
+
+}
+.balanceHeader span{
+    font-weight: 700;
+    color: var(--color-green);
+}
+.AddExpenceBtn{
+    background: linear-gradient(to right, rgba(181, 220, 82, 1), rgba(137, 225, 72, 1));
+    border-radius:10px;
+    padding: 10px;
+    color: var(--color-white);
+}

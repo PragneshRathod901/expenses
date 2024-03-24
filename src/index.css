@@ -1,6 +1,8 @@
 :root {
   /* Global variables to be defined here */
-  /* --color-white: #ffffff; */
+  --color-white: #ffffff;
+  --color-green: green;
+  font-family: Ubuntu,sans-serif;
 }
 
 *,
@@ -14,6 +16,7 @@
 html,
 body {
   height: 100%;
+  background-color: #3B3B3B;
 }
 body {
   line-height: 1.5;
@@ -45,4 +48,8 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+button{
+  outline: none;
+  border: none;
 }

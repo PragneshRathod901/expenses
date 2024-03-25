@@ -1,7 +1,8 @@
 :root {
   /* Global variables to be defined here */
   --color-white: #ffffff;
-  --color-green: green;
+  --color-green:  #9DFF5B;
+  --color-red: #F4BB4A;
   font-family: Ubuntu,sans-serif;
 }
 

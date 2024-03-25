@@ -15,13 +15,23 @@
     color: var(--color-white);
 
 }
-.balanceHeader span{
+.balanceHeader span.expense{
     font-weight: 700;
-    color: var(--color-green);
+    color: var(--color-red);
 }
-.AddExpenceBtn{
+.AddExpenseBtn{
+    background: linear-gradient(90deg, #FF9595 0%, #FF4747 80%, #FF3838 100%);
+    border-radius:10px;
+    padding: 10px;
+    color: var(--color-white);
+}
+.AddBalanceBtn{
     background: linear-gradient(to right, rgba(181, 220, 82, 1), rgba(137, 225, 72, 1));
     border-radius:10px;
     padding: 10px;
     color: var(--color-white);
+}
+.balanceHeader span.balance{
+    font-weight: 700;
+    color: var(--color-green);
 }

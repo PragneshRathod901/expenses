@@ -3,6 +3,7 @@
   --color-white: #ffffff;
   --color-green:  #9DFF5B;
   --color-red: #F4BB4A;
+  --color-grey: #9B9B9B;
   font-family: Ubuntu,sans-serif;
 }
 
@@ -29,7 +30,8 @@ video,
 canvas,
 svg {
   display: block;
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
 }
 input,
 button,

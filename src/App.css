@@ -1,0 +1,25 @@
+.cardShadow{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+.flex{
+    display: flex;
+}
+.spaceBetween{
+    justify-content: space-between;
+}
+.f-column{
+    flex-direction: column;
+}
+.alignItemCentre{
+    align-items: center;
+}
+.justifyContentCentre{
+    justify-content: center;
+}
+.r-gap{
+    row-gap: 1em;
+}
+.c-gap{
+    column-gap: 1em;
+}

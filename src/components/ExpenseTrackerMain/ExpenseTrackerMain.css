@@ -12,6 +12,8 @@
     border-radius: 10px;
     display: flex;
     justify-content: space-around;
+    padding: 2em;
+    background-color:  #626262;
 }
 .card-bg-dark{
     background-color:#626262;

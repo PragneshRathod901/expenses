@@ -10,7 +10,7 @@ const CardWithHeader = ({ header }) => {
   return (
     <div className="card">
       <div className="heading">{header}</div>
-      <div className={"cardContent "}>
+      <div className={"cardContent cardShadow "}>
         <BalanceCard balance={balance} isExpenseCard={false} />
         <BalanceCard balance={expense} isExpenseCard={true} />
       </div>

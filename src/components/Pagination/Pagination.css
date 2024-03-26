@@ -1,0 +1,22 @@
+.pagination{
+    align-self: center;
+    display: flex;
+    column-gap: 14px;
+    padding: 18px 0px 10px 0px;
+}
+.pagination button{
+    width: 37px;
+    height: 37px;
+    border-radius: 15px;
+    color:#222222;
+}
+.pagination div{
+    width: 37px;
+    height: 37px;
+    border-radius: 5px;
+    background-color: #43967B;
+    color: var(--color-white);
+    text-align: center;
+    font-weight: 400;
+    padding: 6.5px;
+}

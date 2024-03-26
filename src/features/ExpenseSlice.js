@@ -47,7 +47,7 @@ const getDataFromLocalStorage = () => {
         category: "Food",
         isExpense: true,
         date: new Date(),
-        id: 0,
+        id: 1,
       },
     ];
   }
@@ -78,7 +78,7 @@ export const ExpenseSlice = createSlice({
 });
 
 export const { AddExpense, EditExpense } = ExpenseSlice.actions;
-
+export const transactions = (state) => state.Expenses.value;
 export const getExpense = (state) =>
   state.Expenses.value.reduce(
     (acc, curValue) => (curValue.isExpense ? acc + curValue.amount : acc),

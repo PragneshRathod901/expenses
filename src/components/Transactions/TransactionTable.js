@@ -8,7 +8,7 @@ import Pagination from "../Pagination/Pagination";
 const TransactionList = () => {
   const _transactions = useSelector(transactions);
   const [pageNum, setPageNumFn] = useState(0);
-  const maxItemPerPage = 1;
+  const maxItemPerPage = 5;
   const getMaxPageCount = (itemCount) => {
     return Math.ceil(itemCount / maxItemPerPage);
   };
@@ -18,6 +18,7 @@ const TransactionList = () => {
       <div className={"transactionTable card-bg-white"}>
         {_transactions &&
           _transactions
+            .filter((value) => value.isExpense)
             .slice(
               //filter items
               pageNum * maxItemPerPage,

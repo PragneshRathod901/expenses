@@ -1,7 +1,15 @@
 import React from "react";
 import "./Balance.css";
+import { ToggleCreateWindow } from "../../features/ExpenseWindowSlice";
+import { useDispatch } from "react-redux";
 
 const BalanceCard = ({ balance, isExpenseCard }) => {
+  const dispatch = useDispatch();
+  const HandleClickAction = (e) => {
+    if (isExpenseCard) {
+      dispatch(ToggleCreateWindow(true));
+    }
+  };
   return (
     <div className="card-balance">
       <div className="balanceHeader">
@@ -10,7 +18,10 @@ const BalanceCard = ({ balance, isExpenseCard }) => {
           ₹{balance}
         </span>
       </div>
-      <button className={isExpenseCard ? "AddExpenseBtn" : "AddBalanceBtn"}>
+      <button
+        className={isExpenseCard ? "AddExpenseBtn" : "AddBalanceBtn"}
+        onClick={HandleClickAction}
+      >
         {isExpenseCard ? "+ Add Expense" : "+ Add Income"}
       </button>
     </div>

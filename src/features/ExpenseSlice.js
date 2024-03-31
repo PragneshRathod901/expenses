@@ -26,70 +26,81 @@ const validateData = (data) => {
   }
   return true;
 };
+const calculateBalance = (data) =>
+  data.reduce(
+    (acc, curValue) =>
+      !curValue.isExpense
+        ? acc + curValue.amount
+        : acc - Number(curValue.amount),
+    0
+  );
 
 const getDataFromLocalStorage = () => {
+  let value = [];
   if (localStorage.getItem("expenses")) {
     let data = JSON.parse(localStorage.getItem("expenses"));
-    return Array.isArray(data) ? data : [];
+    value = Array.isArray(data) ? data : [];
   } else {
-    return [
+    value = [
       {
         title: "income",
         amount: 5000,
         category: "",
         isExpense: false,
-        date: new Date(),
+        date: "2024/03/31",
         id: 0,
-      },
-      {
-        title: "Food",
-        amount: 500,
-        category: "Food",
-        isExpense: true,
-        date: new Date(),
-        id: 1,
       },
     ];
   }
+  return { value, balance: calculateBalance(value) };
 };
+const saveData = (data) =>
+  localStorage.setItem("expenses", JSON.stringify(data));
 
 export const ExpenseSlice = createSlice({
   name: "Expenses",
-  initialState: {
-    value: getDataFromLocalStorage(),
-  },
+  initialState: getDataFromLocalStorage(),
   reducers: {
     AddExpense: (state, action) => {
       if (!validateData(action.payload)) {
         return;
       }
-      action.payload.id = state.Expenses.value.length;
-      state.Expenses.value.push(action.payload);
+
+      action.payload.id = state.value.length;
+      action.payload.isExpense = true;
+      state.value = [...state.value, action.payload];
+      state.balance = calculateBalance(state.value);
+      saveData(state.value);
     },
     EditExpense: (state, action) => {
       if (
         validateData(action.payload) &&
-        state.Expenses.value.length > action.payload.id
+        state.value.length > action.payload.id
       ) {
-        state.Expenses.value[action.payload.id] = action.payload;
+        state.value[action.payload.id] = action.payload;
+        state.balance = calculateBalance(state.value);
+        saveData(state.value);
+      }
+    },
+    DeleteExpense: (state, action) => {
+      if (state.value.length > action.payload.id) {
+        state.value.splice(action.payload.id, 1);
+        state.balance = calculateBalance(state.value);
+        saveData(state.value);
       }
     },
   },
 });
 
-export const { AddExpense, EditExpense } = ExpenseSlice.actions;
+export const { AddExpense, EditExpense, DeleteExpense } = ExpenseSlice.actions;
 export const transactions = (state) => state.Expenses.value;
 export const getExpense = (state) =>
   state.Expenses.value.reduce(
-    (acc, curValue) => (curValue.isExpense ? acc + curValue.amount : acc),
+    (acc, curValue) =>
+      curValue.isExpense ? acc + Number(curValue.amount) : acc,
     0
   );
 
-export const getBalance = (state) =>
-  state.Expenses.value.reduce(
-    (acc, curValue) =>
-      !curValue.isExpense ? acc + curValue.amount : acc - curValue.amount,
-    0
-  );
+export const getBalance = (state) => state.Expenses.balance;
 
 export default ExpenseSlice.reducer;

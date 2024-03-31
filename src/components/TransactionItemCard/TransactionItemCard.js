@@ -7,26 +7,31 @@ import {
   IoMdBus,
 } from "react-icons/io";
 import { BiPencil } from "react-icons/bi";
+import { ToggleEditWindow } from "../../features/ExpenseWindowSlice";
+import { DeleteExpense } from "../../features/ExpenseSlice";
+import { useDispatch } from "react-redux";
+
 const getIconByCategory = (name) => {
   switch (name) {
-    case "Food":
+    case "food":
       return <IoMdPizza />;
-    case "Entertainment":
+    case "entertainment":
       return <IoMdGift />;
-    case "Travel":
+    case "travel":
       return <IoMdBus />;
     default:
-      return <IoMdBus />;
+      return "";
   }
 };
 const TransactionItemCard = ({ data }) => {
+  const dispatch = useDispatch();
   const onClickEdit = (e) => {
     e.stopPropagation();
-    console.log(data);
+    dispatch(ToggleEditWindow(data));
   };
   const onClickRemove = (e) => {
     e.stopPropagation();
-    console.log(data);
+    dispatch(DeleteExpense(data));
   };
   return (
     <div className="flex spaceBetween itemDescription">

@@ -1,6 +1,7 @@
 import "./App.css";
 import ExpenseTrackerMain from "./components/ExpenseTrackerMain/ExpenseTrackerMain";
 import TransactionList from "./components/Transactions/TransactionTable.js";
+import ExpenseForm from "./components/ExpenseForm/ExpenseForm.js";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <div className="flex spaceBetween alignItemCentre">
         <TransactionList />
       </div>
+      <ExpenseForm />
     </div>
   );
 }

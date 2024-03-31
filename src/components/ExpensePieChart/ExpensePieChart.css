@@ -1,0 +1,38 @@
+.pieLabel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    color: var(--color-white);
+    font-weight: 400;
+    font-size: 12px;
+}
+.pieBoxLabel{
+    width:26px;
+    height: 8px;
+}
+.foodColor{
+    background: rgba(160, 0, 255, 1);
+
+}
+.travelColor{
+    background: rgba(253, 224, 6, 1);
+
+}
+.entertainmentColor{
+    background: rgba(255, 147, 4, 1);
+
+}
+.pieLabelBar{
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.pieMainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1em;
+}

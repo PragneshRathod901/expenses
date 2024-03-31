@@ -9,12 +9,14 @@ import {
   ToggleEditWindow,
 } from "../../features/ExpenseWindowSlice";
 import { AddExpense, EditExpense } from "../../features/ExpenseSlice";
+import { useSnackbar } from "notistack";
 
 const ExpenseForm = () => {
   const editWindowObj = useSelector(getExpenseWindowEditState);
   const createWindowOpen = useSelector(getExpenseWindowCreateState);
   const [formData, setFormFn] = useState({});
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (editWindowObj !== null) {
@@ -29,13 +31,16 @@ const ExpenseForm = () => {
       [name]: value,
     }));
   };
+  const showAlert = (msg, alertType) => {
+    enqueueSnackbar(msg, { variant: alertType });
+  };
   const validateData = (data) => {
     if (!data.hasOwnProperty("title") || !data["title"]) {
-      alert("Title required");
+      showAlert("Title required", "error");
       return false;
     }
     if (!data.hasOwnProperty("amount") || Number(data["amount"]) <= 0) {
-      alert("amount required");
+      showAlert("amount required", "error");
 
       return false;
     }
@@ -44,12 +49,12 @@ const ExpenseForm = () => {
       !data.hasOwnProperty("category") ||
       (data["isExpense"] === "true" && !data["category"])
     ) {
-      alert("category required");
+      showAlert("category required", "error");
 
       return false;
     }
     if (!data.hasOwnProperty("date")) {
-      alert("date required");
+      showAlert("date required", "error");
 
       return false;
     }

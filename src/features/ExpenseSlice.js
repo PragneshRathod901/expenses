@@ -2,29 +2,29 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const validateData = (data) => {
   if (!data.hasOwnProperty("title") || !data["title"]) {
-    return false;
+    return [false, "Invalid title"];
   }
   if (!data.hasOwnProperty("amount") || Number(data["amount"]) <= 0) {
-    return false;
+    return [false, "Invalid title"];
   }
   if (!data.hasOwnProperty("isExpense")) {
-    return false;
+    return [false, "Invalid title"];
   }
 
   if (
     !data.hasOwnProperty("category") ||
     (data["isExpense"] === "true" && !data["category"])
   ) {
-    return false;
+    return [false, "Invalid title"];
   }
   if (!data.hasOwnProperty("date")) {
-    return false;
+    return [false, "Invalid title"];
   }
 
   if (!data.hasOwnProperty("id") || Number(data["id"]) < 0) {
-    return false;
+    return [false, "Invalid title"];
   }
-  return true;
+  return [true, ""];
 };
 const calculateBalance = (data) =>
   data.reduce(
@@ -62,24 +62,45 @@ export const ExpenseSlice = createSlice({
   initialState: getDataFromLocalStorage(),
   reducers: {
     AddExpense: (state, action) => {
-      if (!validateData(action.payload)) {
+      let [success, error] = validateData(action.payload);
+      if (!success) {
+        state.alert = { message: error, type: "error" };
         return;
       }
-
+      if (state.balance < action.payload.amount) {
+        state.alert = {
+          message: "You don't have Money to Spend",
+          type: "error",
+        };
+        return;
+      }
       action.payload.id = state.value.length;
       action.payload.isExpense = true;
       state.value = [...state.value, action.payload];
       state.balance = calculateBalance(state.value);
+      state.alert = { message: "Added!", type: "success" };
       saveData(state.value);
     },
     EditExpense: (state, action) => {
-      if (
-        validateData(action.payload) &&
-        state.value.length > action.payload.id
-      ) {
+      let [success, error] = validateData(action.payload);
+      if (!success) {
+        state.alert = { message: error, type: "error" };
+        return;
+      }
+      if (state.balance < action.payload.amount) {
+        state.alert = {
+          message: "You don't have Money to Spend",
+          type: "error",
+        };
+        return;
+      }
+      if (state.value.length > action.payload.id) {
         state.value[action.payload.id] = action.payload;
         state.balance = calculateBalance(state.value);
         saveData(state.value);
+        state.alert = { message: "Saved!", type: "success" };
+      } else {
+        state.alert = { message: "Not found!", type: "error" };
       }
     },
     DeleteExpense: (state, action) => {
@@ -87,6 +108,9 @@ export const ExpenseSlice = createSlice({
         state.value.splice(action.payload.id, 1);
         state.balance = calculateBalance(state.value);
         saveData(state.value);
+        state.alert = { message: "Deleted", type: "success" };
+      } else {
+        state.alert = { message: "Not found!", type: "error" };
       }
     },
   },
@@ -94,6 +118,7 @@ export const ExpenseSlice = createSlice({
 
 export const { AddExpense, EditExpense, DeleteExpense } = ExpenseSlice.actions;
 export const transactions = (state) => state.Expenses.value;
+export const alert = (state) => state.Expenses.alert;
 export const getExpense = (state) =>
   state.Expenses.value.reduce(
     (acc, curValue) =>

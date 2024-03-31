@@ -1,6 +1,9 @@
 import React from "react";
 import "./Balance.css";
-import { ToggleCreateWindow } from "../../features/ExpenseWindowSlice";
+import {
+  ToggleCreateWindow,
+  ToggleBalanceWindow,
+} from "../../features/ExpenseWindowSlice";
 import { useDispatch } from "react-redux";
 
 const BalanceCard = ({ balance, isExpenseCard }) => {
@@ -8,6 +11,8 @@ const BalanceCard = ({ balance, isExpenseCard }) => {
   const HandleClickAction = (e) => {
     if (isExpenseCard) {
       dispatch(ToggleCreateWindow(true));
+    } else {
+      dispatch(ToggleBalanceWindow(true));
     }
   };
   return (

@@ -1,0 +1,10 @@
+.addBalanceForm{
+    display: flex;
+    column-gap: 1em;
+}
+.balance-submit{
+    width: 145px;
+}
+.balance-cancel{
+    width: 112px;
+}

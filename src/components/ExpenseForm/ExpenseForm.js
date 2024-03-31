@@ -64,6 +64,8 @@ const ExpenseForm = () => {
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (editWindowObj !== null) {
+      formData.isExpense = true;
+
       dispatch(EditExpense(formData));
       dispatch(ToggleEditWindow(null));
       setFormFn({});
@@ -103,7 +105,7 @@ const ExpenseForm = () => {
       ariaHideApp={false}
     >
       <h5>{editWindowObj ? "Edit Expense" : "Create Expense"}</h5>
-      <form onSubmit={HandleSubmit}>
+      <form onSubmit={HandleSubmit} className="expenseForm">
         <input
           type="text"
           name="title"

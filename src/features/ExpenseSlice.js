@@ -75,7 +75,6 @@ export const ExpenseSlice = createSlice({
         return;
       }
       action.payload.id = state.value.length;
-      action.payload.isExpense = true;
       state.value = [...state.value, action.payload];
       state.balance = calculateBalance(state.value);
       state.alert = { message: "Added!", type: "success" };
@@ -113,10 +112,29 @@ export const ExpenseSlice = createSlice({
         state.alert = { message: "Not found!", type: "error" };
       }
     },
+    AddBalance: (state, action) => {
+      if (action.payload.amount || action.payload.amount <= 0) {
+        state.alert = { message: "invalid Amount", type: "error" };
+        return;
+      }
+      if (state.balance < action.payload.amount) {
+        state.alert = {
+          message: "You don't have Money to Spend",
+          type: "error",
+        };
+        return;
+      }
+      action.payload.id = state.value.length;
+      state.value = [...state.value, action.payload];
+      state.balance = calculateBalance(state.value);
+      state.alert = { message: "Added!", type: "success" };
+      saveData(state.value);
+    },
   },
 });
 
-export const { AddExpense, EditExpense, DeleteExpense } = ExpenseSlice.actions;
+export const { AddExpense, EditExpense, DeleteExpense, AddBalance } =
+  ExpenseSlice.actions;
 export const transactions = (state) => state.Expenses.value;
 export const alert = (state) => state.Expenses.alert;
 export const getExpense = (state) =>

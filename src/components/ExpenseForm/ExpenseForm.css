@@ -1,9 +1,10 @@
 .Modal{
     background: rgba(239, 239, 239, 0.85);
-    padding: 1em;
+    padding: 39px;
     display:  flex;
     flex-direction: column;
     border-radius: 15px;
+    width: 538px;
 }
 .Overlay{
     display: flex;
@@ -23,13 +24,13 @@
 }
 .Modal form input{
     box-shadow: 0px 4px 4px 0px #00000040;
-    width: 223px;
+    /* width: 223px; */
     outline: none;
     border: none;
     border-radius: 15px;
     padding: 1em;
 }
-.Modal form {
+.Modal .expenseForm {
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 1em;

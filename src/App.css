@@ -23,3 +23,6 @@
 .c-gap{
     column-gap: 1em;
 }
+.align-Item-stretch{
+    align-items: stretch;
+}

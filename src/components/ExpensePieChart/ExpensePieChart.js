@@ -57,7 +57,7 @@ const renderCustomizedLabel = ({
   );
 };
 
-const calculateValue = (array) => {
+export const calculateValue = (array) => {
   let mp = new Map();
   for (let i = 0; i < array.length; i++) {
     if (array[i].isExpense) {
@@ -74,12 +74,12 @@ const calculateValue = (array) => {
   for (let [key, _value] of mp) {
     res.push({
       name: key,
+      label: key.charAt(0).toUpperCase() + key.slice(1),
       value: _value,
       colorClass: getColorClass(key),
       color: getColorValue(key),
     });
   }
-  console.log(res);
   return res;
 };
 
@@ -112,7 +112,7 @@ const ExpensePieChart = () => {
         {data.map((val) => (
           <PieChartLabel
             key={"label" + val.name}
-            labelName={val.name}
+            labelName={val.label}
             labelClass={"pieBoxLabel " + val.colorClass}
           />
         ))}

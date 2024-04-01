@@ -8,7 +8,7 @@ import Pagination from "../Pagination/Pagination";
 const TransactionList = () => {
   const _transactions = useSelector(transactions);
   const [pageNum, setPageNumFn] = useState(0);
-  const maxItemPerPage = 5;
+  const maxItemPerPage = 3;
   const getMaxPageCount = (itemCount) => {
     return Math.ceil(itemCount / maxItemPerPage);
   };
